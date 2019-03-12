@@ -14,8 +14,9 @@
             tools:listitem="@layout/actividad_item"
             tools:itemCount="5"/>
 
+    <!--Nótese como este boton es para agregar una actividad desde esta Activity-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/button_add_actividad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"

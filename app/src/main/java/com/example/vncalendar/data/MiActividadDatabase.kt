@@ -8,6 +8,8 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import java.security.AccessControlContext
 
+
+//Basado en el código del repositorio https://github.com/berkeatac/Notes-App
 @Database(entities = [MiActividad::class], version = 1)
 abstract class MiActividadDatabase:RoomDatabase(){
     abstract fun miActividadDao(): MiActividadDao

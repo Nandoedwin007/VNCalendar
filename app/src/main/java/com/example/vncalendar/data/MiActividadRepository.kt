@@ -4,6 +4,8 @@ import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 
+
+//Basado en el código del repositorio https://github.com/berkeatac/Notes-App
 class MiActividadRepository(application: Application){
     private var miActividadDao:MiActividadDao
     private var allMisActividades:LiveData<List<MiActividad>>

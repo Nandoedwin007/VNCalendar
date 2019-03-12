@@ -3,6 +3,8 @@ package com.example.vncalendar.data
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
+
+//Basado en el código del repositorio https://github.com/berkeatac/Notes-App
 @Dao
 interface MiActividadDao{
     @Insert
