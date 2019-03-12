@@ -20,6 +20,6 @@ interface MiActividadDao{
     fun deleteAllActividades()
 
     @Query ("SELECT * FROM miactividad_table ORDER BY priority DESC")
-    fun getAllActividades():LiveData<List<MiActividad>>
+    fun getAllMisActividades():LiveData<List<MiActividad>>
 
 }

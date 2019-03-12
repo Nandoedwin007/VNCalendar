@@ -27,7 +27,7 @@ class MisActividades : AppCompatActivity() {
         const val EDIT_MIACTIVIDAD_REQUEST = 2
         const val VER_CONTACTO_REQUEST = 3
 
-       lateinit var miActividadViewModelMain:MiActividadViewModelMain
+       lateinit var miActividadViewModelMain: MiActividadViewModelMain
     }
 
 
@@ -46,16 +46,16 @@ class MisActividades : AppCompatActivity() {
             )
         }
 
-        recycler_view_misactividades.layoutManager = LinearLayoutManager(this)
+        recycler_view_misactividades.layoutManager = LinearLayoutManager(this )
         recycler_view_misactividades.setHasFixedSize(true)
 
-        var adapter:MiActividadAdapter()
+        var adapter = MiActividadAdapter()
 
         recycler_view_misactividades.adapter = adapter
 
         miActividadViewModelMain = ViewModelProviders.of(this).get(MiActividadViewModelMain::class.java)
 
-        miActividadViewModelMain.getAllMisActividades().observe(this,Observer<List<MiActividad>>{
+        miActividadViewModelMain.getAllMisActividades().observe(this,Observer<List<MiActividad>> {
             adapter.submitList(it)
         })
 
@@ -125,7 +125,7 @@ class MisActividades : AppCompatActivity() {
                 data.getIntExtra(AgregarActividad.EXTRA_DIA_ACTIVIDAD,1),
                 data.getIntExtra(AgregarActividad.EXTRA_MES_ACTIVIDAD,1),
                 data.getStringExtra(AgregarActividad.EXTRA_FECHA_ACTIVIDAD),
-                data.getIntExtra(AgregarActividad.EXTRA_PRIORITY,1),
+                data.getIntExtra(AgregarActividad.EXTRA_PRIORITY,1)
             )
 
             miActividadViewModelMain.insert(newMiActividad)
@@ -137,6 +137,23 @@ class MisActividades : AppCompatActivity() {
             if (id == -1){
                 Toast.makeText(this, "Lo sentimos, no se ha podido actualizar! Error!", Toast.LENGTH_SHORT).show()
             }
+
+            val updateMiActividad = MiActividad (
+                data!!.getStringExtra(AgregarActividad.EXTRA_TITULO_ACTIVIDAD),
+                data.getStringExtra(AgregarActividad.EXTRA_DESCRIPCION_ACTIVIDAD),
+                data.getIntExtra(AgregarActividad.EXTRA_TIPO_ACTIVIDAD,1),
+                data.getIntExtra(AgregarActividad.EXTRA_TIPO_VIBRACION,1),
+                data.getIntExtra(AgregarActividad.EXTRA_DIA_ACTIVIDAD,1),
+                data.getIntExtra(AgregarActividad.EXTRA_MES_ACTIVIDAD,1),
+                data.getStringExtra(AgregarActividad.EXTRA_FECHA_ACTIVIDAD),
+                data.getIntExtra(AgregarActividad.EXTRA_PRIORITY,1)
+            )
+
+            updateMiActividad.id = data.getIntExtra(AgregarActividad.EXTRA_ID,-1)
+            miActividadViewModelMain.update(updateMiActividad)
+        }
+        else {
+            //Toast.makeText(this, "Contacto not saved!", Toast.LENGTH_SHORT).show()
         }
     }
 }

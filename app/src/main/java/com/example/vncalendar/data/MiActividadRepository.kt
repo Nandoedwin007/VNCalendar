@@ -14,7 +14,7 @@ class MiActividadRepository(application: Application){
         val database:MiActividadDatabase = MiActividadDatabase.getInstance(
             application.applicationContext)!!
         miActividadDao = database.miActividadDao()
-        allMisActividades = miActividadDao.getAllActividades()
+        allMisActividades = miActividadDao.getAllMisActividades()
 
     }
 
