@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -47,6 +48,15 @@ class MiActividadAdapter: androidx.recyclerview.widget.ListAdapter<MiActividad, 
         holder.textViewPriority.text = currentMiActividad.priority.toString()
         holder.textViewTituloActividad.text = currentMiActividad.titulo
         holder.textViewDescripcionActividad.text = currentMiActividad.descipcion
+
+        if (currentMiActividad.tipoActividad == 1){
+            holder.imageViewImagenFondoActividad.setImageResource(R.drawable.actividad_deporte)
+        }else if (currentMiActividad.tipoActividad == 2){
+            holder.imageViewImagenFondoActividad.setImageResource(R.drawable.actividad_estudio)
+        } else {
+            holder.imageViewImagenFondoActividad.setImageResource(R.drawable.actividad_default)
+        }
+
     }
 
     fun getMiActividadAt(position: Int):MiActividad{
@@ -66,6 +76,7 @@ class MiActividadAdapter: androidx.recyclerview.widget.ListAdapter<MiActividad, 
         var textViewPriority:TextView = itemView.text_view_priority
         var textViewTituloActividad:TextView = itemView.text_view_titulo_actividad
         var textViewDescripcionActividad:TextView = itemView.text_view_descripcion_actividad
+        var imageViewImagenFondoActividad:ImageView = itemView.image_fondo_actividad
 
     }
 
