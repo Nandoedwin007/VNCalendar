@@ -1,6 +1,7 @@
 package com.example.vncalendar
 
 import android.app.Activity
+import android.app.TimePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,16 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_agregar_actividad.*
+import java.util.*
+import android.content.Context.ALARM_SERVICE
+import androidx.core.content.ContextCompat.getSystemService
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+
+
+
+
 
 class AgregarActividad : AppCompatActivity() {
 
@@ -33,6 +44,7 @@ class AgregarActividad : AppCompatActivity() {
 
         number_picker_priority.minValue = 1
         number_picker_priority.maxValue = 10
+
 
         if (intent.hasExtra(EXTRA_ID)){
 
@@ -70,6 +82,17 @@ class AgregarActividad : AppCompatActivity() {
         }
 
 
+        fun setAlarm(myCalendar: Calendar){
+            //metodo que programa la alarma en el fondo
+            Toast.makeText(this,"Configurando notificacion",Toast.LENGTH_SHORT).show()
+            val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val intent = Intent(this, AlertReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0)
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP,myCalendar.timeInMillis,pendingIntent)
+
+
+        }
+
 
         botonGuardarActividad.setOnClickListener(object: View.OnClickListener {
             override fun onClick(view: View): Unit {
@@ -88,6 +111,21 @@ class AgregarActividad : AppCompatActivity() {
 
         botonSeleccionarFecha.setOnClickListener{
             Toast.makeText(this,"Lanzar el calendario",Toast.LENGTH_SHORT).show()
+
+
+            //selecciona una hora para la alarma
+            val cal = Calendar.getInstance()
+            val timeSetListener= TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                cal.set(Calendar.HOUR_OF_DAY, hour)
+                cal.set(Calendar.MINUTE, minute)
+                Toast.makeText(this,"Hora : "+hour+" Minuto : "+minute,Toast.LENGTH_SHORT).show()
+                //llama al metodo que configura la alarma
+                setAlarm(cal)
+
+            }
+            TimePickerDialog(this,timeSetListener,cal.get(Calendar.HOUR_OF_DAY),cal.get(Calendar.MINUTE),false).show()
+
+
         }
     }
 
