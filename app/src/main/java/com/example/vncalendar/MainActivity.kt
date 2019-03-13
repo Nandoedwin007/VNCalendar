@@ -9,6 +9,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vncalendar.data.MiActividad
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,10 +25,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+        //val settings= findViewById<>()
+
+//        fab.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show()
+//        }
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -37,8 +40,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
 
-        val intent = Intent(this@MainActivity, MisActividades::class.java)
-        startActivity(intent)
+        //val intent = Intent(this@MainActivity, IniciarSesion::class.java)
+        //startActivity(intent)
 
     }
 
@@ -61,32 +64,37 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
-            R.id.action_settings -> return true
+            R.id.action_settings -> {
+                launchsettings()
+                return true
+            }
+
             else -> return super.onOptionsItemSelected(item)
         }
     }
 
+    fun launchsettings(){
+        val myintent=Intent(this,IniciarSesion::class.java)
+        startActivity(myintent)
+    }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
-            }
-            R.id.nav_gallery -> {
+            R.id.nav_My_Tasks -> {
+                // muestra las tareas ya creadas
+                val myintent = Intent(this@MainActivity,MisActividades::class.java)
+                startActivity(myintent)
 
             }
-            R.id.nav_slideshow -> {
+            R.id.nav_Share_Task -> {
+                //permitira alternar perfiles
+                Toast.makeText(this,"Aun no se pueden compartir tareas", Toast.LENGTH_SHORT).show()
 
             }
-            R.id.nav_manage -> {
 
-            }
-            R.id.nav_share -> {
 
-            }
-            R.id.nav_send -> {
 
-            }
+
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)

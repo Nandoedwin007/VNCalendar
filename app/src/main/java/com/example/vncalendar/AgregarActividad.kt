@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_agregar_actividad.*
 
@@ -59,22 +60,35 @@ class AgregarActividad : AppCompatActivity() {
 
         val botonGuardarActividad = findViewById<Button>(R.id.button_guardar_actividad)
         val botonRegresaActividades = findViewById<Button>(R.id.button_regresar_a_actividades)
+        val botonSeleccionarFecha= findViewById<ImageButton>(R.id.button_pickdate)
+        val botonGrabarAudio=findViewById<ImageButton>(R.id.imageButton_grabar_audio)
 
-        //Funcion que abre la activity de MostrarMenu
+
+        botonGrabarAudio.setOnClickListener{
+            Toast.makeText(this,"Lanzar grabacion de audio",Toast.LENGTH_SHORT).show()
+            // se grabara el audio o importara
+        }
+
+
+
         botonGuardarActividad.setOnClickListener(object: View.OnClickListener {
             override fun onClick(view: View): Unit {
-                // Handler code here.
+                //Funcion que intenta guardar la informacion en el formulario
                 saveMiActividad()
             }
         })
 
-        //Funcion que abre la activity de MostrarMenu
+        //Funcion que abre la activity de mis actividades
         botonRegresaActividades.setOnClickListener(object: View.OnClickListener {
             override fun onClick(view: View): Unit {
-                // Handler code here.
+
                 finish()
             }
         })
+
+        botonSeleccionarFecha.setOnClickListener{
+            Toast.makeText(this,"Lanzar el calendario",Toast.LENGTH_SHORT).show()
+        }
     }
 
     //Debo colocar el boton que guarda el contacto
@@ -83,6 +97,7 @@ class AgregarActividad : AppCompatActivity() {
 
 
     private fun saveMiActividad(){
+        //no agregar actividades si los campos estan vacios
         if (edit_text_titulo_actividad.text.toString().trim().isBlank() ||
                 edit_text_descripción_actividad.text.toString().trim().isBlank()){
             Toast.makeText(this, "No se puede agregar una nueva actividad", Toast.LENGTH_SHORT).show()

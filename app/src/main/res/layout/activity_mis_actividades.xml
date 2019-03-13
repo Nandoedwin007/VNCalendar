@@ -21,5 +21,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@android:drawable/ic_menu_add"/>
+            app:srcCompat="@android:drawable/ic_menu_add" app:layout_anchorGravity="right|top"
+            app:layout_anchor="@+id/recycler_view_misactividades"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

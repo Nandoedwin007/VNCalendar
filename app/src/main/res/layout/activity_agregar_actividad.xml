@@ -85,7 +85,7 @@
     <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_menu_my_calendar"
-            android:id="@+id/imageButton3"
+            android:id="@+id/button_pickdate"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintStart_toEndOf="@+id/radioGroup_tipos_vibracion" android:layout_marginStart="8dp"
             app:layout_constraintHorizontal_bias="0.473" android:layout_marginTop="36dp"
