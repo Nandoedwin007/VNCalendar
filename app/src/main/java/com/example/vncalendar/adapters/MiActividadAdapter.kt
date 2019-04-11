@@ -45,7 +45,8 @@ class MiActividadAdapter: androidx.recyclerview.widget.ListAdapter<MiActividad, 
         val currentMiActividad : MiActividad = getItem(position)
 
         //Aquí van los holders
-        holder.textViewPriority.text = currentMiActividad.priority.toString()
+        //holder.textViewPriority.text = currentMiActividad.priority.toString()
+
         holder.textViewTituloActividad.text = currentMiActividad.titulo
         holder.textViewDescripcionActividad.text = currentMiActividad.descipcion
 
