@@ -13,9 +13,7 @@ import java.util.*
 import android.content.Context.ALARM_SERVICE
 import androidx.core.content.ContextCompat.getSystemService
 import android.content.Context
-
-
-
+import android.widget.TextView
 
 
 class AgregarActividad : AppCompatActivity() {
@@ -72,6 +70,12 @@ class AgregarActividad : AppCompatActivity() {
         val botonSeleccionarFecha= findViewById<ImageButton>(R.id.button_pickdate)
         val botonGrabarAudio=findViewById<ImageButton>(R.id.imageButton_grabar_audio)
 
+        val myDateYear =findViewById<TextView>(R.id.myDateYear)
+        val myDateWeek = findViewById<TextView>(R.id.myDateWeek)
+        val myDateDay = findViewById<TextView>(R.id.myDateDay)
+        val myTimeHour = findViewById<TextView>(R.id.myTimeHour)
+        val myTimeMinute = findViewById<TextView>(R.id.myTimeMinute)
+
 
         botonGrabarAudio.setOnClickListener{
             Toast.makeText(this,"Lanzar grabacion de audio",Toast.LENGTH_SHORT).show()
@@ -107,7 +111,7 @@ class AgregarActividad : AppCompatActivity() {
         })
 
         botonSeleccionarFecha.setOnClickListener{
-            Toast.makeText(this,"Lanzar el calendario",Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this,"Lanzar el calendario",Toast.LENGTH_SHORT).show()
             //pickTime()
 
             //selecciona una hora para la alarma
@@ -117,6 +121,9 @@ class AgregarActividad : AppCompatActivity() {
                 cal.set(Calendar.HOUR_OF_DAY, hour)
                 cal.set(Calendar.MINUTE, minute)
                 Toast.makeText(this,"Hora : "+hour+" Minuto : "+minute,Toast.LENGTH_SHORT).show()
+                myTimeHour.setText(hour.toString())
+                myTimeMinute.setText(minute.toString())
+
                 //llama al metodo que configura la alarma
 
 
@@ -132,6 +139,9 @@ class AgregarActividad : AppCompatActivity() {
                 cal2.set(Calendar.DAY_OF_WEEK,day)
                 Toast.makeText(this,"YEAR : "+year+" WEEK : "+week+ " DAY :"+ day,Toast.LENGTH_SHORT).show()
                 //llama al metodo que configura la alarma
+                myDateYear.setText(year.toString())
+                myDateWeek.setText(week.toString())
+                myDateDay.setText(day.toString())
 
 
             }
