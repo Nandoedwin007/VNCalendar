@@ -47,9 +47,9 @@ abstract class MiActividadDatabase:RoomDatabase(){
         private val miActividadDao = db?.miActividadDao()
 
         override fun doInBackground(vararg params: Unit?) {
-            miActividadDao?.insert(MiActividad("Titulo 1","Descripción 1",1,1,1,1,"fecha 1",1))
-            miActividadDao?.insert(MiActividad("Titulo 2","Descripción 2",2,2,2,2,"fecha 2",2))
-            miActividadDao?.insert(MiActividad("Titulo 3","Descripción 3",3,3,3,3,"fecha 3",3))
+            miActividadDao?.insert(MiActividad("Titulo 1","Descripción 1",1,1,1,1,0,1,1))
+            miActividadDao?.insert(MiActividad("Titulo 2","Descripción 2",2,2,2,2,1,1,2))
+            miActividadDao?.insert(MiActividad("Titulo 3","Descripción 3",3,3,3,3,0,3,3))
         }
     }
 }

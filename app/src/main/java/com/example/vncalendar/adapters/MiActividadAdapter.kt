@@ -25,10 +25,15 @@ class MiActividadAdapter: androidx.recyclerview.widget.ListAdapter<MiActividad, 
 
             //Nótese que si se cambia algo en la clase MiActividad aquí también se debe considerar el cambio
             override fun areContentsTheSame(oldItem: MiActividad, newItem: MiActividad): Boolean {
-                return oldItem.titulo == newItem.titulo && oldItem.descipcion == newItem.descipcion &&
-                        oldItem.tipoActividad == newItem.tipoActividad && oldItem.tipoVibracion == newItem.tipoVibracion &&
-                        oldItem.diaActividad == newItem.diaActividad && oldItem.mesActividad == newItem.mesActividad &&
-                        oldItem.fecha == oldItem.fecha && oldItem.priority == newItem.priority
+                return oldItem.titulo == newItem.titulo &&
+                        oldItem.descipcion == newItem.descipcion &&
+                        oldItem.tipoActividad == newItem.tipoActividad  &&
+                        oldItem.anoActividad == newItem.anoActividad &&
+                        oldItem.mesActividad == newItem.mesActividad &&
+                        oldItem.diaActividad == oldItem.diaActividad &&
+                        oldItem.horaActividad == oldItem.horaActividad &&
+                        oldItem.minutoActividad == oldItem.minutoActividad &&
+                        oldItem.priority == newItem.priority
             }
         }
     }
@@ -45,7 +50,8 @@ class MiActividadAdapter: androidx.recyclerview.widget.ListAdapter<MiActividad, 
         val currentMiActividad : MiActividad = getItem(position)
 
         //Aquí van los holders
-        holder.textViewPriority.text = currentMiActividad.priority.toString()
+        //holder.textViewPriority.text = currentMiActividad.priority.toString()
+
         holder.textViewTituloActividad.text = currentMiActividad.titulo
         holder.textViewDescripcionActividad.text = currentMiActividad.descipcion
 
