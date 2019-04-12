@@ -135,6 +135,7 @@ class MisActividades : AppCompatActivity() {
             override fun onDataChange(p0: DataSnapshot) {
                 p0.children.forEach {
                     Log.d("Usuarios",it.toString())
+                    val user = it.getValue(User::class.java)
                 }
             }
 
