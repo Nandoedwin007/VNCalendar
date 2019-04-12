@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.renderscript.Sampler
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -22,11 +23,9 @@ import com.example.vncalendar.adapters.MiActividadAdapter
 import com.example.vncalendar.data.MiActividad
 import com.example.vncalendar.viewmodels.MiActividadViewModelMain
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_iniciar_sesion.*
 import kotlinx.android.synthetic.main.activity_mis_actividades.*
 
 
@@ -55,9 +54,11 @@ class MisActividades : AppCompatActivity() {
 
         verifyUserIsLoggedIn()
 
-        fetchUsers()
+        //fetchUsers()
 
-        supportActionBar?.setDisplayShowTitleEnabled(false)
+        fetchUsuario()
+
+        //supportActionBar?.setDisplayShowTitleEnabled(false)
 
 
         button_add_actividad.setOnClickListener{
@@ -124,6 +125,7 @@ class MisActividades : AppCompatActivity() {
 
     }
 
+
     private fun verifyUserIsLoggedIn(){
         val uid = FirebaseAuth.getInstance().uid
         if (uid == null){
@@ -133,19 +135,77 @@ class MisActividades : AppCompatActivity() {
         }
     }
 
+    fun fetchUsuario(){
+
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid
+        val rootRef = FirebaseDatabase.getInstance().reference
+        val uidRef = rootRef.child("users").child(uid)
+
+        val valueEventListener = object : ValueEventListener{
+            override fun onDataChange(p0: DataSnapshot) {
+                val usuario = p0.getValue(User::class.java)
+
+                Log.d("Snapshot2",p0.value.toString())
+                Log.d("Snapshot",usuario?.profileImageUrl)
+                Log.d("Snapshot3",usuario.toString())
+
+                if(usuario?.profileImageUrl!=null){
+
+                    Picasso.get().load(usuario.profileImageUrl.toString()).into(fotoperfil_circleimageview_misactividades)
+                    fotoperfil_circleimageview_misactividades.bringToFront()
+
+                    //Picasso.get().load(usuario?.profileImageUrl.toString()).into(button_add_actividad)
+                }
+
+                Picasso.get().load(usuario?.profileImageUrl.toString()).into(button_add_actividad)
+
+
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+        }
+        uidRef.addListenerForSingleValueEvent(valueEventListener)
+//        FirebaseDatabase.getInstance().reference.child("users").addValueEventListener(object : ValueEventListener{
+//            override fun onDataChange(p0: DataSnapshot) {
+//                Log.d("Snapshot",p0!!.value.toString())
+//
+//                val usuario = p0!!.value.toString()
+//
+//                Log.d("Snapshot",usuario[2].toString())
+//
+//                if(usuario[2].toString()!=null){
+//
+//                    Picasso.get().load(usuario[1].toString()).into(fotoperfil_circleimageview_misactividades)
+//                    fotoperfil_circleimageview_misactividades.bringToFront()
+//
+//                    Picasso.get().load(usuario[1].toString()).into(button_add_actividad)
+//                }
+//
+//            }
+//
+//            override fun onCancelled(p0: DatabaseError) {
+//            }
+//        })
+    }
+
     private fun fetchUsers(){
-        val ref = FirebaseDatabase.getInstance().getReference("/users/")
+        val ref = FirebaseDatabase.getInstance().getReference(FirebaseAuth.getInstance().uid.toString())
 
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
-                p0.children.forEach {
-                    Log.d("Usuarios",it.toString())
-                    val user = it.getValue(User::class.java)
+                val ref2 = p0.child(FirebaseAuth.getInstance().uid.toString())
+                //p0.children.forEach {
+                Log.d("Usuarios",ref2.toString())
+                val user = ref2.getValue(User::class.java)
 
 
-                    Picasso.get().load(user?.profileImageUrl)
-                    //supportActionBar?.setIcon()
-                }
+                Picasso.get().load(user?.profileImageUrl).into(fotoperfil_circleimageview_misactividades)
+                fotoperfil_circleimageview_misactividades.bringToFront()
+                //Thread.sleep(10000)
+                //supportActionBar?.setIcon()
+                //}
             }
 
             override fun onCancelled(p0: DatabaseError) {
@@ -161,6 +221,8 @@ class MisActividades : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         miActividadViewModelMain.setUid(FirebaseAuth.getInstance().uid.toString())
+
+        fetchUsuario()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

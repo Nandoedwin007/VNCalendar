@@ -7,6 +7,11 @@ import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_iniciar_sesion.*
 import kotlinx.android.synthetic.main.activity_iniciar_sesion.view.*
 
@@ -66,6 +71,9 @@ class IniciarSesion : AppCompatActivity() {
                 Log.d("Iniciar","Se ha iniciado sesion el usuario: ${it.result.user.uid}")
                 Toast.makeText(this,"Ha iniciado sesión con éxito! ",Toast.LENGTH_SHORT).show()
 
+                fetchUsers()
+
+
                 val intent = Intent(this, MisActividades::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
@@ -75,5 +83,32 @@ class IniciarSesion : AppCompatActivity() {
                 Log.d("Iniciar","No se ha podido iniciar sesión usuario: ${it.message}")
                 Toast.makeText(this,"No se ha podido iniciar sesión usuario: ${it.message}",Toast.LENGTH_SHORT).show()
             }
+    }
+
+    fun sleep(millis:Long){
+        throw InterruptedException()
+    }
+
+    private fun fetchUsers(){
+        val ref = FirebaseDatabase.getInstance().getReference(FirebaseAuth.getInstance().uid.toString())
+
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                val ref2 = p0.child(FirebaseAuth.getInstance().uid.toString())
+                //p0.children.forEach {
+                    Log.d("Usuarios",ref2.toString())
+                    val user = ref2.getValue(User::class.java)
+
+
+                    Picasso.get().load(user?.profileImageUrl).into(foto_perfil_imageview_iniciar_sesion)
+                    //Thread.sleep(10000)
+                    //supportActionBar?.setIcon()
+                //}
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+        })
     }
 }
