@@ -83,10 +83,12 @@ class MisActividades : AppCompatActivity() {
                 intent.putExtra(AgregarActividad.EXTRA_TITULO_ACTIVIDAD,miActividad.titulo)
                 intent.putExtra(AgregarActividad.EXTRA_DESCRIPCION_ACTIVIDAD,miActividad.descipcion)
                 intent.putExtra(AgregarActividad.EXTRA_TIPO_ACTIVIDAD,miActividad.tipoActividad)
-                intent.putExtra(AgregarActividad.EXTRA_TIPO_VIBRACION,miActividad.tipoVibracion)
+                //intent.putExtra(AgregarActividad.EXTRA_TIPO_VIBRACION,miActividad.tipoVibracion)
                 intent.putExtra(AgregarActividad.EXTRA_DIA_ACTIVIDAD,miActividad.diaActividad)
                 intent.putExtra(AgregarActividad.EXTRA_MES_ACTIVIDAD,miActividad.mesActividad)
-                intent.putExtra(AgregarActividad.EXTRA_FECHA_ACTIVIDAD,miActividad.fecha)
+                intent.putExtra(AgregarActividad.EXTRA_ANO_ACTIVIDAD,miActividad.anoActividad)
+                intent.putExtra(AgregarActividad.EXTRA_HORA_ACTIVIDAD,miActividad.horaActividad)
+                intent.putExtra(AgregarActividad.EXTRA_MINUTO_ACTIVIDAD,miActividad.minutoActividad)
                 intent.putExtra(AgregarActividad.EXTRA_PRIORITY,miActividad.priority)
 
                 startActivityForResult(intent, EDIT_MIACTIVIDAD_REQUEST)
@@ -121,10 +123,12 @@ class MisActividades : AppCompatActivity() {
                 data!!.getStringExtra(AgregarActividad.EXTRA_TITULO_ACTIVIDAD),
                 data.getStringExtra(AgregarActividad.EXTRA_DESCRIPCION_ACTIVIDAD),
                 data.getIntExtra(AgregarActividad.EXTRA_TIPO_ACTIVIDAD,1),
-                data.getIntExtra(AgregarActividad.EXTRA_TIPO_VIBRACION,1),
-                data.getIntExtra(AgregarActividad.EXTRA_DIA_ACTIVIDAD,1),
+                data.getIntExtra(AgregarActividad.EXTRA_ANO_ACTIVIDAD,1),
                 data.getIntExtra(AgregarActividad.EXTRA_MES_ACTIVIDAD,1),
-                data.getStringExtra(AgregarActividad.EXTRA_FECHA_ACTIVIDAD),
+                data.getIntExtra(AgregarActividad.EXTRA_DIA_ACTIVIDAD,1),
+                data.getIntExtra(AgregarActividad.EXTRA_HORA_ACTIVIDAD,1),
+                data.getIntExtra(AgregarActividad.EXTRA_MINUTO_ACTIVIDAD,1),
+
                 data.getIntExtra(AgregarActividad.EXTRA_PRIORITY,1)
             )
 
@@ -142,10 +146,13 @@ class MisActividades : AppCompatActivity() {
                 data!!.getStringExtra(AgregarActividad.EXTRA_TITULO_ACTIVIDAD),
                 data.getStringExtra(AgregarActividad.EXTRA_DESCRIPCION_ACTIVIDAD),
                 data.getIntExtra(AgregarActividad.EXTRA_TIPO_ACTIVIDAD,1),
-                data.getIntExtra(AgregarActividad.EXTRA_TIPO_VIBRACION,1),
-                data.getIntExtra(AgregarActividad.EXTRA_DIA_ACTIVIDAD,1),
+                data.getIntExtra(AgregarActividad.EXTRA_ANO_ACTIVIDAD,1),
                 data.getIntExtra(AgregarActividad.EXTRA_MES_ACTIVIDAD,1),
-                data.getStringExtra(AgregarActividad.EXTRA_FECHA_ACTIVIDAD),
+                data.getIntExtra(AgregarActividad.EXTRA_DIA_ACTIVIDAD,1),
+                data.getIntExtra(AgregarActividad.EXTRA_HORA_ACTIVIDAD,1),
+                data.getIntExtra(AgregarActividad.EXTRA_MINUTO_ACTIVIDAD,1),
+
+
                 data.getIntExtra(AgregarActividad.EXTRA_PRIORITY,1)
             )
 

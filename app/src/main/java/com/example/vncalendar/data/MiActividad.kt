@@ -10,10 +10,11 @@ data class MiActividad(
     var titulo:String,
     var descipcion: String,
     var tipoActividad: Int, //Variable que describe si es actividad de ejercio o estudio, etc.
-    var tipoVibracion: Int, //Variable que define el tipo de vibración que sonará en la notifiación
-    var diaActividad: Int,
+    var anoActividad:Int,
     var mesActividad: Int,
-    var fecha:String,
+    var diaActividad: Int,
+    var horaActividad :Int,
+    var minutoActividad: Int,
     var priority:Int
 ) {
 
