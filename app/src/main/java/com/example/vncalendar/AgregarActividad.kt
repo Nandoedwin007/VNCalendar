@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_agregar_actividad.*
 import java.util.*
 import android.content.Context
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
 
 
 class AgregarActividad : AppCompatActivity() {
@@ -30,6 +31,8 @@ class AgregarActividad : AppCompatActivity() {
         const val EXTRA_HORA_ACTIVIDAD= "com.example.vncalendar.EXTRA_HORA_ACTIVIDAD"
         const val EXTRA_MINUTO_ACTIVIDAD= "com.example.vncalendar.EXTRA_MINUTO_ACTIVIDAD"
         const val EXTRA_PRIORITY = "com.example.vncalendar.EXTRA_PRIORITY"
+        const val EXTRA_USERID = "com.example.vncalendar.EXTRA_USERID"
+
     }
 
 
@@ -212,6 +215,7 @@ class AgregarActividad : AppCompatActivity() {
 
             //Extra priority
             putExtra(EXTRA_PRIORITY,number_picker_priority.value)
+            putExtra(EXTRA_USERID,FirebaseAuth.getInstance().uid.toString())
 
             if (intent.getIntExtra(EXTRA_ID,-1) != -1) {
                 putExtra(EXTRA_ID,intent.getIntExtra(EXTRA_ID,-1))

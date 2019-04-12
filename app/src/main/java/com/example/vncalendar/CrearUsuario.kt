@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -78,6 +80,33 @@ class CrearUsuario : AppCompatActivity() {
         //updateUI(currentUser)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.nav_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.iniciar_sesion_registro ->{
+                val uid = FirebaseAuth.getInstance().uid
+                if (uid != null){
+
+                    FirebaseAuth.getInstance().signOut()
+                    val intent = Intent(this,IniciarSesion::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }else if (uid == null){
+                    val intent = Intent(this,IniciarSesion::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
+
+
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
     private fun registrarUsuario(){
         val emailRegistro = email_edittext_registro.text.toString()
         val contrasenaRegistro = contrasena_edittext_registro.text.toString()
@@ -102,7 +131,13 @@ class CrearUsuario : AppCompatActivity() {
                 Log.d("CrearUsuario","Se ha creado el usuario: ${it.result.user.uid}")
                 Toast.makeText(this,"Se ha creado el usuario exitosamente! ",Toast.LENGTH_SHORT).show()
 
+
+
                 uploadImageToFirebaseStorage()
+
+                val intent = Intent(this, MisActividades::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
             }
             .addOnFailureListener {
                 Log.d("CrearUsuario","No se ha podido crear usuario: ${it.message}")

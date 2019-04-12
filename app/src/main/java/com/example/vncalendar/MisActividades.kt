@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vncalendar.adapters.MiActividadAdapter
 import com.example.vncalendar.data.MiActividad
 import com.example.vncalendar.viewmodels.MiActividadViewModelMain
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_mis_actividades.*
 
 
@@ -28,6 +30,7 @@ class MisActividades : AppCompatActivity() {
         const val VER_CONTACTO_REQUEST = 3
 
        lateinit var miActividadViewModelMain: MiActividadViewModelMain
+
     }
 
 
@@ -38,6 +41,8 @@ class MisActividades : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mis_actividades)
+
+        verifyUserIsLoggedIn()
 
         button_add_actividad.setOnClickListener{
             startActivityForResult(
@@ -53,11 +58,17 @@ class MisActividades : AppCompatActivity() {
 
         recycler_view_misactividades.adapter = adapter
 
+
+
         miActividadViewModelMain = ViewModelProviders.of(this).get(MiActividadViewModelMain::class.java)
+
+        miActividadViewModelMain.setUid(FirebaseAuth.getInstance().uid.toString())
 
         miActividadViewModelMain.getAllMisActividades().observe(this,Observer<List<MiActividad>> {
             adapter.submitList(it)
         })
+        
+        
 
         ItemTouchHelper(object :ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT.or(ItemTouchHelper.RIGHT)){
             override fun onMove(
@@ -96,6 +107,45 @@ class MisActividades : AppCompatActivity() {
         })
 
     }
+
+    private fun verifyUserIsLoggedIn(){
+        val uid = FirebaseAuth.getInstance().uid
+        if (uid == null){
+            val intent = Intent(this,CrearUsuario::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        miActividadViewModelMain.setUid(FirebaseAuth.getInstance().uid.toString())
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.menu_cerrar_sesion -> {
+                FirebaseAuth.getInstance().signOut()
+
+                val intent = Intent(this,IniciarSesion::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+            R.id.action_settings ->{
+                FirebaseAuth.getInstance().signOut()
+
+                val intent = Intent(this,IniciarSesion::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 //Código de referencia del laboratorio 7
 //    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 //        return super.onCreateOptionsMenu(menu)
@@ -129,7 +179,8 @@ class MisActividades : AppCompatActivity() {
                 data.getIntExtra(AgregarActividad.EXTRA_HORA_ACTIVIDAD,1),
                 data.getIntExtra(AgregarActividad.EXTRA_MINUTO_ACTIVIDAD,1),
 
-                data.getIntExtra(AgregarActividad.EXTRA_PRIORITY,1)
+                data.getIntExtra(AgregarActividad.EXTRA_PRIORITY,1),
+                data.getStringExtra(AgregarActividad.EXTRA_USERID)
             )
 
             miActividadViewModelMain.insert(newMiActividad)
@@ -153,7 +204,8 @@ class MisActividades : AppCompatActivity() {
                 data.getIntExtra(AgregarActividad.EXTRA_MINUTO_ACTIVIDAD,1),
 
 
-                data.getIntExtra(AgregarActividad.EXTRA_PRIORITY,1)
+                data.getIntExtra(AgregarActividad.EXTRA_PRIORITY,1),
+                data.getStringExtra(AgregarActividad.EXTRA_USERID)
             )
 
             updateMiActividad.id = data.getIntExtra(AgregarActividad.EXTRA_ID,-1)

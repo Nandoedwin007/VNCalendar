@@ -3,18 +3,25 @@ package com.example.vncalendar.data
 import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
+import com.google.firebase.auth.FirebaseAuth
 
 
 //Basado en el código del repositorio https://github.com/berkeatac/Notes-App
-class MiActividadRepository(application: Application){
+class MiActividadRepository(application: Application,uid:String){
     private var miActividadDao:MiActividadDao
     private var allMisActividades:LiveData<List<MiActividad>>
 
-    init {
-        val database:MiActividadDatabase = MiActividadDatabase.getInstance(
-            application.applicationContext)!!
+    init{
+
+        var database:MiActividadDatabase = MiActividadDatabase.getInstance(
+            application.applicationContext,uid)!!
         miActividadDao = database.miActividadDao()
         allMisActividades = miActividadDao.getAllMisActividades()
+
+
+    }
+
+    fun closeDB(){
 
     }
 

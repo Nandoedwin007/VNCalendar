@@ -15,7 +15,8 @@ data class MiActividad(
     var diaActividad: Int,
     var horaActividad :Int,
     var minutoActividad: Int,
-    var priority:Int
+    var priority:Int,
+    var userid:String
 ) {
 
     @PrimaryKey(autoGenerate = true)
