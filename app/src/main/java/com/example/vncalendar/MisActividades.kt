@@ -139,7 +139,7 @@ class MisActividades : AppCompatActivity() {
             R.id.action_settings ->{
                 FirebaseAuth.getInstance().signOut()
 
-                val intent = Intent(this,IniciarSesion::class.java)
+                val intent = Intent(this,CrearUsuario::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }

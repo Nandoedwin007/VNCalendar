@@ -21,7 +21,7 @@ class IniciarSesion : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         val button_iniciar_sesion= findViewById<Button>(R.id.button_iniciar_sesion)
-        val button_regresar = findViewById<Button>(R.id.button_regresar_sesion)
+        //val button_regresar = findViewById<Button>(R.id.button_regresar_sesion)
 
         button_iniciar_sesion.setOnClickListener{
 
@@ -33,9 +33,11 @@ class IniciarSesion : AppCompatActivity() {
 
         }
 
-        button_regresar_sesion.setOnClickListener{
-            Toast.makeText(this,"Regresar",Toast.LENGTH_SHORT).show()
-            finish()
+        desea_crear_usuario_textview_iniciarsesion.setOnClickListener{
+
+            val intent = Intent(this,CrearUsuario::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
         }
     }
 
