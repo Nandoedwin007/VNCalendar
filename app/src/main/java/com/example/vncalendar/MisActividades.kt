@@ -157,7 +157,7 @@ class MisActividades : AppCompatActivity() {
                     //Picasso.get().load(usuario?.profileImageUrl.toString()).into(button_add_actividad)
                 }
 
-                Picasso.get().load(usuario?.profileImageUrl.toString()).into(button_add_actividad)
+                //Picasso.get().load(usuario?.profileImageUrl.toString()).into(button_add_actividad)
 
 
             }

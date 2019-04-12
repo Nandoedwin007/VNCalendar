@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         tools:context=".MisActividades">
 
-    <de.hdodenhof.circleimageview.CircleImageView android:layout_width="150dp" android:layout_height="150dp"
+    <de.hdodenhof.circleimageview.CircleImageView android:layout_width="100dp" android:layout_height="100dp"
                                                   android:id="@+id/fotoperfil_circleimageview_misactividades"
                                                   android:visibility="visible"
                                                   android:layout_gravity="left|bottom"
