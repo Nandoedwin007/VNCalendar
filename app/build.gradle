@@ -28,6 +28,8 @@ dependencies {
     def lifecycle_version = "2.0.0"
     def room_version = "2.1.0-alpha04"
     def design_version = "28.0.0"
+    def playServices = "16.0.1"
+    def dagger = "2.22.1"
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
@@ -51,4 +53,17 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.2-alpha02'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha02'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+    //DI
+    implementation "com.google.dagger:dagger:$dagger"
+    kapt "com.google.dagger:dagger-compiler:$dagger"
+
+    //firebase
+    implementation "com.google.firebase:firebase-core:$playServices"
+    implementation "com.google.firebase:firebase-auth:$playServices"
+    implementation "com.google.firebase:firebase-database:$playServices"
+
+    implementation "com.google.firebase:firebase-storage:$playServices"
 }
+
+apply plugin: 'com.google.gms.google-services'

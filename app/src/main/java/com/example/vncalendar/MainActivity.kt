@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun launchsettings(){
-        val myintent=Intent(this,IniciarSesion::class.java)
+        val myintent=Intent(this,CrearUsuario::class.java)
         startActivity(myintent)
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

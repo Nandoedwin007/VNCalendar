@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "617097337931",
+    "firebase_url": "https://vncalendar-4d6d1.firebaseio.com",
+    "project_id": "vncalendar-4d6d1",
+    "storage_bucket": "vncalendar-4d6d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617097337931:android:5dc029b1a4a830f5",
+        "android_client_info": {
+          "package_name": "com.example.vncalendar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_Gpkn4bnFs3qLSpFsCOtfgn6J1x8r9ks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617097337931-u60pkh42ea2m57ri3uqh7h469j8gh0l8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
