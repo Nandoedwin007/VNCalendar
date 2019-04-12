@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -18,10 +19,16 @@ import com.example.vncalendar.adapters.MiActividadAdapter
 import com.example.vncalendar.data.MiActividad
 import com.example.vncalendar.viewmodels.MiActividadViewModelMain
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_mis_actividades.*
 
 
 //Basado en el código del repositorio https://github.com/berkeatac/Notes-App
+
+//FIrebase basado en https://www.youtube.com/watch?v=SuRiwVF5bzs&t=902s
 class MisActividades : AppCompatActivity() {
 
     companion object {
@@ -43,6 +50,10 @@ class MisActividades : AppCompatActivity() {
         setContentView(R.layout.activity_mis_actividades)
 
         verifyUserIsLoggedIn()
+
+        fetchUsers()
+
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         button_add_actividad.setOnClickListener{
             startActivityForResult(
@@ -117,6 +128,21 @@ class MisActividades : AppCompatActivity() {
         }
     }
 
+    private fun fetchUsers(){
+        val ref = FirebaseDatabase.getInstance().getReference("/users/")
+
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                p0.children.forEach {
+                    Log.d("Usuarios",it.toString())
+                }
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+        })
+    }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main,menu)
         return super.onCreateOptionsMenu(menu)
