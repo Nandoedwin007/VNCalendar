@@ -64,6 +64,9 @@ dependencies {
     implementation "com.google.firebase:firebase-database:$playServices"
 
     implementation "com.google.firebase:firebase-storage:$playServices"
+
+    //Circle ImageView
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

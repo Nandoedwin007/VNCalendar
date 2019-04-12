@@ -12,11 +12,12 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:ems="10"
-            android:id="@+id/email_edittext_registro" android:layout_marginEnd="24dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.0" android:hint="Email" android:layout_marginTop="28dp"
-            app:layout_constraintTop_toBottomOf="@+id/selecionarfoto_button_registro"/>
+            android:id="@+id/email_edittext_registro"
+            android:hint="Email"
+            app:layout_constraintStart_toStartOf="@+id/username_editText_registro"
+            app:layout_constraintEnd_toEndOf="@+id/username_editText_registro" android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/username_editText_registro"
+            app:layout_constraintHorizontal_bias="0.0"/>
     <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -25,7 +26,7 @@
             android:id="@+id/contrasena_edittext_registro"
             app:layout_constraintEnd_toEndOf="@+id/email_edittext_registro"
             app:layout_constraintStart_toStartOf="@+id/email_edittext_registro"
-            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="32dp"
+            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@+id/email_edittext_registro" android:hint="Contraseña"/>
     <Button
             android:text="Registrar"
@@ -54,4 +55,21 @@
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView android:layout_width="150dp" android:layout_height="150dp"
+                                                  app:layout_constraintEnd_toEndOf="@+id/selecionarfoto_button_registro"
+                                                  app:layout_constraintTop_toTopOf="@+id/selecionarfoto_button_registro"
+                                                  app:layout_constraintStart_toStartOf="@+id/selecionarfoto_button_registro"
+                                                  app:layout_constraintBottom_toBottomOf="@+id/selecionarfoto_button_registro"
+                                                  android:id="@+id/fotoperfil_circleimageview_registro"/>
+    <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/username_editText_registro" android:hint="Username" android:layout_marginStart="32dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="28dp"
+            app:layout_constraintTop_toBottomOf="@+id/selecionarfoto_button_registro"
+            app:layout_constraintHorizontal_bias="0.0"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

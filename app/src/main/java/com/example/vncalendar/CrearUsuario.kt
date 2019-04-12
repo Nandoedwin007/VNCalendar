@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_crear_usuario.*
 import java.util.*
@@ -59,8 +60,11 @@ class CrearUsuario : AppCompatActivity() {
 
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,uriFotoSeleccionada)
 
-            val bitmapDrawable = BitmapDrawable(bitmap)
-            selecionarfoto_button_registro.setBackgroundDrawable(bitmapDrawable)
+            fotoperfil_circleimageview_registro.setImageBitmap(bitmap)
+
+            fotoperfil_circleimageview_registro.alpha = 0f
+//            val bitmapDrawable = BitmapDrawable(bitmap)
+//            selecionarfoto_button_registro.setBackgroundDrawable(bitmapDrawable)
         }
     }
 
@@ -113,6 +117,29 @@ class CrearUsuario : AppCompatActivity() {
         ref.putFile(uriFotoSeleccionada!!)
             .addOnSuccessListener {
                 Log.d("CrearUsuario", "Se ha subido la foto exitosamente: ${it.metadata?.path}")
+
+                ref.downloadUrl.addOnSuccessListener {
+                    Log.d("CrearUsuario", "File Location $it")
+
+                    saveUserToFirebaseDatabase(it.toString())
+                }
+            }
+            .addOnFailureListener {
+                Log.d("CrearUsuario","No se ha podido cargar imagen")
+            }
+    }
+
+    private fun saveUserToFirebaseDatabase(profileImageUrl:String) {
+        val uid = FirebaseAuth.getInstance().uid ?: ""
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+
+        val user = User(uid,username_editText_registro.text.toString(),profileImageUrl)
+
+        ref.setValue(user)
+            .addOnSuccessListener {
+                Log.d("CrearUsuario", "Se ha guardado el usuario en la base de datos Firebase")
             }
     }
 }
+
+class User (val uid:String,val username: String, val profileImageUrl: String)
