@@ -2,6 +2,9 @@ package com.example.vncalendar
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +26,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_mis_actividades.*
 
 
@@ -54,6 +58,7 @@ class MisActividades : AppCompatActivity() {
         fetchUsers()
 
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
 
         button_add_actividad.setOnClickListener{
             startActivityForResult(
@@ -136,6 +141,10 @@ class MisActividades : AppCompatActivity() {
                 p0.children.forEach {
                     Log.d("Usuarios",it.toString())
                     val user = it.getValue(User::class.java)
+
+
+                    Picasso.get().load(user?.profileImageUrl)
+                    //supportActionBar?.setIcon()
                 }
             }
 

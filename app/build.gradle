@@ -54,6 +54,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha02'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
+    //Picaso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
     //DI
     implementation "com.google.dagger:dagger:$dagger"
     kapt "com.google.dagger:dagger-compiler:$dagger"

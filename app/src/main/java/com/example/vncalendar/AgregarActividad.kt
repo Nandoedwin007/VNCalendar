@@ -55,7 +55,17 @@ class AgregarActividad : AppCompatActivity() {
                 deporte.isChecked = true
             }else if (intent.getIntExtra(EXTRA_TIPO_ACTIVIDAD,1) == 2){
                 estudio.isChecked = true
-            }//else if (intent.getIntExtra(EXTRA_TIPO_ACTIVIDAD,1)==3){
+            }
+
+            myDateYear.setText(intent.getIntExtra(EXTRA_ANO_ACTIVIDAD,19).toString())
+            myDateMonth.setText(intent.getIntExtra(EXTRA_MES_ACTIVIDAD,4).toString())
+            myDateDay.setText(intent.getIntExtra(EXTRA_DIA_ACTIVIDAD,12).toString())
+
+            myTimeHour.setText(intent.getIntExtra(EXTRA_HORA_ACTIVIDAD,1).toString())
+            myTimeMinute.setText(intent.getIntExtra(EXTRA_MINUTO_ACTIVIDAD,15).toString())
+
+
+            //else if (intent.getIntExtra(EXTRA_TIPO_ACTIVIDAD,1)==3){
                 //mandado.isChecked = true
             //}
 
@@ -208,9 +218,11 @@ class AgregarActividad : AppCompatActivity() {
 
             //Fecha solo para pruebas
 
-            putExtra(EXTRA_DIA_ACTIVIDAD,myDateDay.getText())
-            putExtra(EXTRA_MES_ACTIVIDAD,myDateMonth.getText())
-            putExtra(EXTRA_ANO_ACTIVIDAD,myDateYear.getText())
+            putExtra(EXTRA_DIA_ACTIVIDAD,myDateDay.getText().toString().toInt())
+            putExtra(EXTRA_MES_ACTIVIDAD,myDateMonth.getText().toString().toInt())
+            putExtra(EXTRA_ANO_ACTIVIDAD,myDateYear.getText().toString().toInt())
+            putExtra(EXTRA_HORA_ACTIVIDAD,myTimeHour.getText().toString().toInt())
+            putExtra(EXTRA_MINUTO_ACTIVIDAD,myTimeMinute.getText().toString().toInt())
 
 
             //Extra priority
