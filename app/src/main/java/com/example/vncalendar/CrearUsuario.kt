@@ -31,6 +31,7 @@ class CrearUsuario : AppCompatActivity() {
             registrarUsuario()
         }
 
+        fotoperfil_circleimageview_registro.bringToFront()
         selecionarfoto_button_registro.setOnClickListener {
             Log.d("CrearUsuario","Se presiono boton de selecionar foto")
 
@@ -62,7 +63,9 @@ class CrearUsuario : AppCompatActivity() {
 
             fotoperfil_circleimageview_registro.setImageBitmap(bitmap)
 
-            fotoperfil_circleimageview_registro.alpha = 0f
+            selecionarfoto_button_registro.alpha = 0f
+            fotoperfil_circleimageview_registro.bringToFront()
+
 //            val bitmapDrawable = BitmapDrawable(bitmap)
 //            selecionarfoto_button_registro.setBackgroundDrawable(bitmapDrawable)
         }

@@ -46,22 +46,26 @@
             app:layout_constraintStart_toStartOf="@+id/registrar_button_registro" android:layout_marginTop="38dp"
             app:layout_constraintTop_toBottomOf="@+id/registrar_button_registro" android:textSize="18sp"
             android:textAllCaps="false" android:textStyle="bold"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView android:layout_width="150dp" android:layout_height="150dp"
+                                                  android:id="@+id/fotoperfil_circleimageview_registro"
+                                                  android:visibility="visible"
+                                                  app:layout_constraintEnd_toEndOf="@+id/selecionarfoto_button_registro"
+                                                  app:layout_constraintTop_toTopOf="@+id/selecionarfoto_button_registro"
+                                                  app:layout_constraintBottom_toBottomOf="@+id/selecionarfoto_button_registro"
+                                                  app:layout_constraintVertical_bias="1.0"
+                                                  app:layout_constraintStart_toStartOf="@+id/selecionarfoto_button_registro"/>
     <Button
-            android:text="Seleccione Foto de Perfil"
+            android:text="Seleccione Foto"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:background="@drawable/rounded_seleccionar_foto_button"
-            android:id="@+id/selecionarfoto_button_registro" android:layout_marginTop="8dp"
+            android:id="@+id/selecionarfoto_button_registro" android:layout_marginTop="24dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"/>
 
-    <de.hdodenhof.circleimageview.CircleImageView android:layout_width="150dp" android:layout_height="150dp"
-                                                  app:layout_constraintEnd_toEndOf="@+id/selecionarfoto_button_registro"
-                                                  app:layout_constraintTop_toTopOf="@+id/selecionarfoto_button_registro"
-                                                  app:layout_constraintStart_toStartOf="@+id/selecionarfoto_button_registro"
-                                                  app:layout_constraintBottom_toBottomOf="@+id/selecionarfoto_button_registro"
-                                                  android:id="@+id/fotoperfil_circleimageview_registro"/>
+
     <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
